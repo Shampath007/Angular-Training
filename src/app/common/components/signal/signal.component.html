@@ -1,0 +1,29 @@
+<div class="container">
+    <p>Signal Works</p>
+    <p>Count: {{signalservice.counter()}}</p>
+    <p>Double Count: {{signalservice.doubleCount()}}</p>
+    <p>{{signalservice.message}}</p>
+    <button (click)="signalservice.incrementParent()" [disabled]="signalservice.counter()>=10">Increment</button>
+    <button (click)="signalservice.decrementParent()" [disabled]="signalservice.counter()==0">Decrement</button>
+    <button (click)="signalservice.reset()">Reset</button>
+</div>
+<div class="container">
+    <p>Todo List</p>
+    <input type="text" [(ngModel)]="text" name="text">
+    <button (click)="add()">Add</button>
+</div>
+<div>
+    <p>The total number of task is {{counttodo()}}</p>
+</div>
+
+    @for(item of todo();track $index){
+        <span>{{item}}</span>&nbsp;
+        @if(item){
+    <button (click)="removeItem($index)">remove</button>
+    <button (click)="editItem($index)">edit</button>
+    }
+}
+<button (click)="logout()">Logout</button>
+
+
+<!-- <app-signal-child></app-signal-child> -->

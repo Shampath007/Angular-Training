@@ -1,0 +1,43 @@
+
+<div class="container">
+    <div class="page-container">
+        <label for="search-term">Search</label>
+        <input placeholder="Enter term" (input)="updateSearch($event)" id="search-term">
+        <div *ngFor="let result of results" [innerHTML]="result.summary | highlight: searchTerm"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-container">
+        <label for="search-term">Search</label>
+        <input placeholder="Enter term" (input)="updateSearch($event)" id="search-term">
+        <button (click)="onadd()">Add</button>
+        <div *ngFor="let item of users | filter:'gender':'m'">{{item.name}}</div>
+        <br>
+        {{'Shampath'| append:' Kumar'|lowercase}}
+    </div>
+</div>
+
+<div class="datecontainer">
+    <div class="pagedatecontainer">
+        <label for="Date-term">Date</label>
+        <div>{{inputDate|datecompare}}</div>
+    </div>
+</div>
+
+<div class="filesizecontainer">
+    <div class="filesizepagecontainer">
+        <label for="openimage">fileupload</label>
+        <input type="file" (change)="onFileSelected($event)"  (click)="open()">
+        @if(opening){
+        <div>{{filesize|filesize}}</div>
+        <div>The opened image is {{filename}}</div>
+        <div>
+            <h1>The Dimension of the image is</h1><span>{{imagewidth}} X {{imageheight}}</span>
+        </div>
+        <div><img [src]="imageUrl"></div>
+    }
+    </div>
+</div>
+
+

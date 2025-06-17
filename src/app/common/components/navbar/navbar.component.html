@@ -1,0 +1,29 @@
+
+<mat-toolbar color="primary" class="navbar">
+    <div fxFlex="90%">
+    <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <!-- <span routerLink="/app/home">My App</span> -->
+    </div>
+ 
+    <div fxLayoutAlign="end end">
+        <button (click)="logout()">Logout</button>
+    </div>
+</mat-toolbar>
+<mat-sidenav-container class="container">
+    <mat-sidenav #sidenav [mode]="sidenavmode" [opened]="opened" fixedInViewport >
+        <mat-nav-list>
+            <a *ngFor="let item of menuItems" mat-list-item [routerLink]="item.routerLink" 
+            [ngClass]="{'active':activeRoute() === item.label}" >
+                {{ item.label }}
+            </a>
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+

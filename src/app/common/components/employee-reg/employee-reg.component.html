@@ -1,0 +1,218 @@
+ @if(employeeRegistrationForm){ 
+<div class="container">
+    <div class="page-container">
+        <form [formGroup]="employeeRegistrationForm">
+            <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-md="column" fxLayoutGap-lt.md="0">
+                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                    <mat-label fxFlex="40%">First Name</mat-label>
+                    <mat-form-field fxFlex="60%" appearance="outline">
+                        <input matInput formControlName="firstName">
+                        @if(employeeRegistrationForm.get('firstName')?.hasError('required')){
+                        <mat-error class="ex">{{message.FIELD_REQUIRED}}</mat-error>
+                        }
+                        @if(employeeRegistrationForm.get('firstName')?.hasError('pattern')){
+                        <mat-error>{{message.INVALID_FORMAT}}</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                    <mat-label fxFlex="40%">Last Name</mat-label>
+                    <mat-form-field fxFlex="60%" appearance="outline">
+                        <input matInput formControlName="lastName">
+                        @if(employeeRegistrationForm.get('lastName')?.hasError('required')){
+                        <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-md="column" fxLayoutGap-lt.md="0">
+                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                    <mat-label fxFlex="40%">Email</mat-label>
+                    <mat-form-field fxFlex="60%" appearance="outline">
+                        <input matInput formControlName="email">
+                        @if(employeeRegistrationForm.get('email')?.hasError('required')){
+                        <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                        }
+                        @if(employeeRegistrationForm.get('email')?.hasError('email')){
+                        <mat-error>{{message.INVALID_FORMAT}}</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                    <mat-label fxFlex="40%">Alternative Email</mat-label>
+                    <mat-form-field fxFlex="60%" appearance="outline">
+                      
+                        <input matInput formControlName="alternativeEmail">
+                        @if(employeeRegistrationForm.get('alternativeEmail')?.hasError('required')){
+                        <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-md="column" fxLayoutGap.lt-md="0">
+                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                    <mat-label fxFlex="40%">Date of Birth</mat-label>
+                    <mat-form-field fxFlex="60%" appearance="outline">
+                        <input matInput [matDatepicker]="picker" formControlName="DateofBirth" [max]="todaydate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        @if(employeeRegistrationForm.get('DateofBirth')?.hasError('required')&&!employeeRegistrationForm.get
+                        ('DateofBirth')?.hasError('matDatepickerParse')){
+                        <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                        }
+                        @if(employeeRegistrationForm.get('DateofBirth')?.hasError('matDatepickerParse')){
+                        <mat-error>{{message.INVALID_DATE}}</mat-error>
+                        }
+                        @if(employeeRegistrationForm.get('DateofBirth')?.hasError('matDatepickerMax')){
+                            <mat-error>{{message.ERROR}}</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                    <mat-label fxFlex="40%">Date of Joining</mat-label>
+                    <mat-form-field fxFlex="60%" appearance="outline">
+                        <input matInput [matDatepicker]="picker2" formControlName="DateofJoining" [min]="employeeRegistrationForm.get('DateofBirth')?.value" (dateInput)="onGet($event)">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                        @if(employeeRegistrationForm.get('DateofJoining')?.hasError('required')&&!employeeRegistrationForm.get
+                        ('DateofJoining')?.hasError('matDatepickerParse')){
+                        <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                        }
+                        @if(employeeRegistrationForm.get('DateofJoining')?.hasError('required')&&employeeRegistrationForm.get
+                        ('DateofJoining')?.hasError('matDatepickerParse')){
+                        <mat-error>{{message.INVALID_DATE}}</mat-error>
+                        }
+                        @if(employeeRegistrationForm.get('DateofJoining')?.hasError('matDatepickerMin')){
+                            <mat-error>{{message.ERROR}}</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="5%" fxLayoutGap.lt-md="0">
+                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                    <mat-label fxFlex="40%">Designation</mat-label>
+                    <mat-form-field fxFlex="60%" appearance="outline">
+                        <mat-select formControlName="designationId">
+                            @for (item of Designation; track item) {
+                            <mat-option [value]="item?.id">{{item.name}}</mat-option>
+                            }
+                        </mat-select>
+                         @if(employeeRegistrationForm.get('designationId')?.hasError('required')){
+                            <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                        } 
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                    <mat-label fxFlex="40%">Role</mat-label>
+                <mat-form-field fxFlex="60%" appearance="outline">
+                    <mat-select formControlName="roleId">
+                        @for(item of Role;track item){
+                            <mat-option [value]="item?.id">{{item.name}}</mat-option>
+                        }
+                    </mat-select>
+                     @if(employeeRegistrationForm.get('roleId')?.hasError('required')){
+                    <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                    }
+                     
+                </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="5%" fxLayoutGap.lt-md="0">
+                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                    <mat-label fxFlex="40%">Status</mat-label>
+                    <mat-form-field fxFlex="60%" appearance="outline">
+                        <mat-select formControlName="status" (selectionChange)="onSelect($event)">
+                            @for (item of Status; track item) {
+                            <mat-option [value]="item?.id">{{item.name}}</mat-option>
+                            }
+                        </mat-select>
+                        @if(employeeRegistrationForm.get('status')?.hasError('required')){
+                        <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                        }
+                        @if(employeeRegistrationForm.get('status')?.hasError('misMatch')){
+                        <mat-error>{{message.DATE_WARNING}}</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+                @if(this.employeeRegistrationForm.get('newControl')){
+                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                <mat-label fxFlex="40%">Field</mat-label>
+                <mat-form-field fxFlex="60%" appearance="outline">
+                    <input matInput formControlName="newControl">
+                    @if(employeeRegistrationForm.get('newControl')?.hasError('misMatch')){
+                        <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        }
+        @else{<div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column"></div>}
+        </div>
+            <mat-divider></mat-divider>
+            @if(employeeRegistrationForm&&getContacts().length>0){
+                <div formArrayName="contacts">
+                    <div fxLayout="row" fxLayoutAlign="start start" style="margin:20px 0px 20px 0px">
+                        <div class="page heading"><h1>Contacts</h1></div>
+                    </div>
+                    @for(item of getContacts();track $index ; let i=$index){
+                        <div [formGroupName]="i">
+                            <div fxLayout="row" fxLayoutAlign="end center">
+                                <mat-icon (click)="createArray()">add_circle</mat-icon>
+                                @if(i>0){
+                                <mat-icon (click)="removeItem(i)">remove_circle_outline</mat-icon>
+                                }
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-md="column" fxLayoutGap-lt.md="0">
+                                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                                    <mat-label fxFlex="40%">Address</mat-label>
+                                    <mat-form-field fxFlex="60%" appearance="outline">
+                                        <input matInput formControlName="address">
+                                        @if(getControls(employeeRegistrationForm,i).address?.hasError('required')){
+                                            <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                                    <mat-label fxFlex="40%">City</mat-label>
+                                    <mat-form-field fxFlex="60%" appearance="outline">
+                                        <input matInput formControlName="city">
+                                        @if(getControls(employeeRegistrationForm,i).city?.hasError('required')){
+                                        <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-md="column" fxLayoutGap-lt.md="0">
+                                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                                    <mat-label fxFlex="40%">State</mat-label>
+                                    <mat-form-field fxFlex="60%" appearance="outline">
+                                        <input matInput formControlName="state">
+                                        @if(getControls(employeeRegistrationForm,i).state?.hasError('required')){
+                                            <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="50%" fxLayout="row" fxLayout.lt-md="column">
+                                    <mat-label fxFlex="40%">Pincode</mat-label>
+                                    <mat-form-field fxFlex="60%" appearance="outline">
+                                        <input matInput formControlName="pincode">
+                                        @if(getControls(employeeRegistrationForm,i).pincode?.hasError('required')){
+                                            <mat-error>{{message.FIELD_REQUIRED}}</mat-error>
+                                        }
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>    
+            }
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <button mat-stroked-button color="primary" (click)="reset()" type="button">Reset</button>
+                <button mat-raised-button type="submit" (click)="submit()" color="primary">Submit</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+}

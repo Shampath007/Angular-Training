@@ -1,0 +1,39 @@
+.warn button {
+    position: absolute;
+    right: 10px;
+}
+
+.warn span {
+    position: absolute;
+    top: 75px;
+    color: yellow;
+}
+
+mat-dialog-content {
+    margin-left: 5px;
+}
+
+.true {
+    margin-left: 150px;
+}
+
+.show span {
+    position: absolute;
+    top: 75px;
+    color: blue;
+}
+
+.show button {
+    position: absolute;
+    right: 10px;
+}
+
+.error span{
+    position: absolute;
+    top: 76px;
+    color:red;
+}
+.error button {
+    position: absolute;
+    right: 10px;
+}

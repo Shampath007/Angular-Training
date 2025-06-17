@@ -1,0 +1,8 @@
+{
+    "FIELD_REQUIRED":"This is Required",
+    "INVALID_FIELD":"This field is invalid",
+    "INVALID_FORMAT":"Please enter correct format",
+    "INVALID_DATE":"Invalid Date",
+    "ERROR":"Error",
+    "DATE_WARNING":"Date should be in Today's Date"
+}

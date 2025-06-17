@@ -1,0 +1,50 @@
+
+@if(data.header=="confirmation"){
+<h2 mat-dialog-title>{{data.header}}</h2>
+<mat-dialog-content>
+<p>{{data.content}}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+<button mat-raised-button [mat-dialog-close]="true" class="true">Yes</button>
+<button mat-stroked-button [mat-dialog-close]="false">No</button>
+</mat-dialog-actions>
+}
+@if(data.header==="warning")
+{
+<div class="warn">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<h2 mat-dialog-title>{{data.header}}</h2>
+<mat-dialog-content>
+<p>{{data.content}}</p>
+</mat-dialog-content>
+<mat-dialog-actions class="warn">
+<button mat-raised-button [mat-dialog-close]="true">ok</button>
+</mat-dialog-actions>
+}
+@if(data.header==="success")
+{
+<div class="show">
+    <span class="material-symbols-outlined show">info</span>
+</div>
+
+<h2 mat-dialog-title>{{data.header}}</h2>
+<mat-dialog-content>
+<p>{{data.content}}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+<button mat-raised-button [mat-dialog-close]="true" class="true">ok</button>
+</mat-dialog-actions>
+}
+@if(data.header=="Error"){
+<div class="error">
+<span class="material-symbols-outlined">error</span>
+</div>
+<h2 mat-dialog-title>{{data.header}}</h2>
+<mat-dialog-content>
+<p>{{data.content}}</p>
+</mat-dialog-content>
+<mat-dialog-actions class="error">
+<button mat-raised-button [mat-dialog-close]="true">ok</button>
+</mat-dialog-actions>
+}

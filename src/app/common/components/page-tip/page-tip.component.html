@@ -1,0 +1,21 @@
+<div fxLayout="column" fxFlex="10%">
+    <h1 class="page-title">{{title}}</h1>
+    <div fxLayout="column" fxFlex="10%">
+        <div class="description">{{description}}</div>
+    </div>
+</div>
+<div fxFlex="100%" fxLayoutAlign="end start">
+    @if(actionArray&&actionArray.length)
+    {
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon class="icon">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            @for(item of actionArray ; track item.label){
+                <button mat-menu-item (click)="onActionEmit(item)">
+                    {{item?.label}}
+                </button>
+            }
+        </mat-menu>
+    }
+</div>
