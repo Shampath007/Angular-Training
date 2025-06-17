@@ -6,16 +6,14 @@ export interface FormCanDeactivate{
   canDeactivate():boolean;
 }
 export const canDeactivateGuard: CanDeactivateFn<FormCanDeactivate> =(component)=> {
-  console.log(component);
-  const dialogService=inject(DialogService);
-  if (component.canDeactivate()) {
-    return of(true);
-  }
-  return new Observable((observer)=>{
-  const dialogRef = dialogService.openConfirmationDialog('Are you sure you want to leave? Unsaved changes will be lost.');
-  dialogRef.afterClosed().subscribe((res: boolean) => {
-    observer.complete();
-  }); 
-  });
+console.log("CanDeactivate Works");
+const dialogservice = inject(DialogService);
+if (!component.canDeactivate()) {
+  console.log("CanDeactivate Works");
+  const ref = dialogservice.openConfirmationDialog("Are u want to navigate away from page");
+  return ref.afterClosed();
+}
+return true;
  
 };
+
